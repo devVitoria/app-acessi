@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import { useColorScheme } from "@/components/useColorScheme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
@@ -49,7 +50,7 @@ function RootLayoutNav() {
 
   return (
     <Stack>
-      <Stack.Screen name="home" options={{ headerShown: false }} />
+      <Stack.Screen name="home" options={{ header: () => <Header/> }} />
       <Stack.Screen name="register" options={{ headerShown: false }} />
     </Stack>
   );
