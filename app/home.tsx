@@ -73,7 +73,6 @@ export default function Home() {
             className="w-full mx-5 flex-row items-center justify-between border border-yellow-200 bg-yellow-50 h-16 rounded-md"
           >
             <View className="flex flex-row items-center gap-2 ml-2">
-              {" "}
               <MaterialIcons
                 name="check-box-outline-blank"
                 size={36}
