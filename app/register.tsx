@@ -17,7 +17,7 @@ export default function Register() {
 
   return (
     <View className="flex-1 bg-white items-center justify-start">
-      <View className=" w-16 h-16 rounded-full bg-[#ca8a04] p-4 justify-center items-center my-6 mt-16">
+      <View className=" w-16 h-16 rounded-full bg-[#ca8a04] p-4 justify-center items-center my-6 mt-20">
         <AcessiLogo
           width={44}
           height={44}
