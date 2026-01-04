@@ -21,7 +21,7 @@ export default function Animation() {
         style={[
           {
             animationName: float,
-            zIndex: 50,
+            zIndex: 10,
             top: 200,
             animationDuration: "2s",
             animationIterationCount: "infinite",
@@ -40,6 +40,7 @@ export default function Animation() {
             position: "absolute",
             bottom: 0,
             top: 30,
+            zIndex: 5,
             animationName: float,
             animationDuration: "3s",
             animationIterationCount: "infinite",

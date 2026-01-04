@@ -1,7 +1,7 @@
 export interface RegisterProps {
     name: string;
-    cpf: string;
     email: string;
+    cpf: string;
     password: string;
 }
 
