@@ -12,6 +12,7 @@ export interface StepOneProps {
  handleAceptTerms: () => void
  termsAccepted: boolean
  disableButton: boolean
+ register: () => void
 }
 
 

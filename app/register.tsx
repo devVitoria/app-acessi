@@ -1,13 +1,16 @@
 import { initialValuesRegister } from "@/components/constants";
 import { RegisterProps } from "@/components/interface";
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PagerView from "react-native-pager-view";
+
 
 import Animation from "@/components/animations/animation";
 import StepMarker from "@/components/register/step-marker";
 import StepOne from "@/components/register/step-one";
 import StepTwo from "@/components/register/step-two";
+import { register } from "@/services/auth";
 import AcessiLogo from "../assets/images/logo-acessi-light.svg";
 import "../global.css";
 
@@ -23,6 +26,17 @@ export default function Register() {
     setTermsAccepted(!termsAccepted);
   };
   const [alterStepBtn, setAlterStepBtn] = useState(0);
+
+  const sendRegister = useMutation({
+    mutationFn: register,
+    onSuccess(data, variables, onMutateResult, context) {
+      console.log("Teste", data)
+    },
+  })
+
+  const handleRegister = () => {
+    sendRegister.mutate(input)
+  }
 
   useEffect(() => {
     const handleDisableButton = () => {
@@ -93,6 +107,7 @@ export default function Register() {
               input={input}
               setInput={setInput}
               termsAccepted={termsAccepted}
+              register={handleRegister}
             />
           </View>
           <View style={styles.page} key="2">

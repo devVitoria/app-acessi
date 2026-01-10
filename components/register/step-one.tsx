@@ -11,6 +11,7 @@ export default function StepOne({
   handleAceptTerms,
   termsAccepted,
   disableButton,
+  register,
 }: StepOneProps) {
   return (
     <View className="bg-white/70  p-2 rounded-lg border-[0.05px] border-yellow-800">
@@ -65,7 +66,7 @@ export default function StepOne({
         }}
         key={disableButton ? 1 : 0}
         className="p-4 rounded-md z-50 bg-yellow-600 opacity-50 border border-yellow-700 w-full shadow-lg mt-4"
-        onPress={() => console.log("Chamar a API de cadastro")}
+        onPress={register}
         disabled={disableButton}
       >
         <Text className=" text-white text-center font-bold">Cadastrar</Text>
