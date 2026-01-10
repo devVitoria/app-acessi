@@ -26,27 +26,26 @@ export default function Home() {
 
       <View className="flex mx-4 flex-1 mt-[30%] bg-white border border-gray-300 w-full rounded-t-3xl  drop-shadow-lg p-10">
         <View className="flex flex-wrap flex-row w-full gap-4 justify-around">
-          {Object.entries(options).map((i) => (
-            <TouchableOpacity
-              onPress={() => {
-                router.push("/register");
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/register");
+            }}
+          >
+         
+
+            <View
+              className="h-16 w-16 rounded-full bg-yellow-700 justify-center items-center gap-2"
+              style={{
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.1,
+                shadowRadius: 8,
+                elevation: 4,
               }}
             >
-              <View
-                key={"it" + i}
-                className="h-16 w-16 rounded-full bg-yellow-700 justify-center items-center gap-2"
-                style={{
-                  shadowColor: "#000",
-                  shadowOffset: { width: 0, height: 4 },
-                  shadowOpacity: 0.1,
-                  shadowRadius: 8,
-                  elevation: 4,
-                }}
-              >
-                {i[1]}
-              </View>
-            </TouchableOpacity>
-          ))}
+              <Text>i</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

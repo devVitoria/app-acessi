@@ -12,5 +12,6 @@ export interface RegisterFieldsProps {
     minLength: number;
     label: string;
     validation: RegExp | null;
+    keyboard: string;
     mask?: string;
 }
