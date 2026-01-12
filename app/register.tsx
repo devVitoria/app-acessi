@@ -1,10 +1,9 @@
 import { initialValuesRegister } from "@/components/constants";
 import { RegisterProps } from "@/components/interface";
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PagerView from "react-native-pager-view";
-
 
 import Animation from "@/components/animations/animation";
 import StepMarker from "@/components/register/step-marker";
@@ -30,18 +29,23 @@ export default function Register() {
   const sendRegister = useMutation({
     mutationFn: register,
     onSuccess(data, variables, onMutateResult, context) {
-      console.log("Teste", data)
+      console.log("Teste", data);
     },
-  })
+    onError: (e) => {
+      console.log("ERRROOOROROR", e);
+    },
+  });
 
   const handleRegister = () => {
-    sendRegister.mutate(input)
-  }
+    console.log("Vai chamar o mutate");
+    sendRegister.mutate(input);
+  };
 
   useEffect(() => {
     const handleDisableButton = () => {
-      const isDisabled =
-        Object.values(input).every((value) => value.length === 0) 
+      const isDisabled = Object.values(input).every(
+        (value) => value.length === 0
+      );
       setDisableButton(isDisabled);
     };
 
