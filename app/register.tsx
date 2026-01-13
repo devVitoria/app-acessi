@@ -2,14 +2,16 @@ import { initialValuesRegister } from "@/components/constants";
 import { RegisterProps } from "@/components/interface";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, ToastAndroid, View } from "react-native";
 import PagerView from "react-native-pager-view";
+
 
 import Animation from "@/components/animations/animation";
 import StepMarker from "@/components/register/step-marker";
 import StepOne from "@/components/register/step-one";
 import StepTwo from "@/components/register/step-two";
 import { register } from "@/services/auth";
+import { router } from "expo-router";
 import AcessiLogo from "../assets/images/logo-acessi-light.svg";
 import "../global.css";
 
@@ -28,16 +30,20 @@ export default function Register() {
 
   const sendRegister = useMutation({
     mutationFn: register,
-    onSuccess(data, variables, onMutateResult, context) {
-      console.log("Teste", data);
+    onSuccess() {
+      setInput(initialValuesRegister)
+      ToastAndroid.show('A conta foi registrada! Redirecionando para Login...', ToastAndroid.SHORT);
+
+      setTimeout(() => {
+        router.push("/login")
+      }, 1000);
     },
     onError: (e) => {
-      console.log("ERRROOOROROR", e);
+      console.log("erro", e);
     },
   });
-
+ 
   const handleRegister = () => {
-    console.log("Vai chamar o mutate");
     sendRegister.mutate(input);
   };
 
