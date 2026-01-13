@@ -9,7 +9,7 @@ export interface RegisterProps {
 export interface RegisterFieldsProps {
     placeholder: string;
     error: string;
-    minLength: number;
+    maxLength: number | undefined;
     label: string;
     validation: RegExp | null;
     keyboard: string;

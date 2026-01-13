@@ -10,7 +10,7 @@ import "react-native-reanimated";
 import "../global.css";
 
 export {
-  ErrorBoundary,
+  ErrorBoundary
 } from "expo-router";
 
 export const unstable_settings = {

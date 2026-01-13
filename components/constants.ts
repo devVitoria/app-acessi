@@ -19,7 +19,7 @@ export const fixValuesRegister: Record<
   name: {
     placeholder: "Digite seu nome completo...",
     error: "Nome é obrigatório",
-    minLength: 3,
+    maxLength: undefined,
     label: "Nome",
     keyboard: "default",
     validation: null,
@@ -27,7 +27,7 @@ export const fixValuesRegister: Record<
   cpf: {
     placeholder: "000.000.000-00",
     error: "CPF é obrigatório",
-    minLength: 11,
+    maxLength: 11,
     label: "CPF",
     keyboard: "numeric",
     validation: null,
@@ -35,7 +35,7 @@ export const fixValuesRegister: Record<
   email: {
     placeholder: "seuemail@gmail.com",
     error: "E-mail é obrigatório",
-    minLength: 5,
+    maxLength: undefined,
     label: "E-mail",
     keyboard: "email-address",
 
@@ -44,7 +44,7 @@ export const fixValuesRegister: Record<
   password: {
     placeholder: "******",
     error: "Senha é obrigatória",
-    minLength: 6,
+    maxLength: 6,
     label: "Senha",
     keyboard: "numeric",
     validation: null,

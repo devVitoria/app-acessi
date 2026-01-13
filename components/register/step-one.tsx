@@ -29,6 +29,7 @@ export default function StepOne({
             onChangeText={(te) => setInput({ ...input, [key]: te })}
             placeholderTextColor={"#ca8a04"}
             value={value}
+            maxLength={fixValuesRegister[key as keyof RegisterProps].maxLength}
             keyboardType={
               fixValuesRegister[key as keyof RegisterProps]
                 .keyboard as KeyboardType
