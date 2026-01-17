@@ -52,7 +52,7 @@ export default function Login() {
             maxLength={6}
             keyboardType="numeric"
             placeholder={"******"}
-          ></TextInput>
+          />
         </View>
         <View className="px-2 pt-4">
           <TouchableOpacity
@@ -89,7 +89,7 @@ setResetPassoword(true)          }}
         </TouchableOpacity>
       </View>
 
-      {resetPassword && <ResetPassword/>}
+      {resetPassword && <ResetPassword open={resetPassword} setOpen={setResetPassoword} cpfProvided={cpf.length === 11 ? cpf : undefined}/>}
 
       <View className="absolute bottom-0 w-full h-1/3 rounded-t-3xl items-center justify-center z-20">
         <Animation />
