@@ -9,9 +9,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
 
-export {
-  ErrorBoundary
-} from "expo-router";
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -46,7 +44,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 2,
-      staleTime: 1000 * 60 * 5, 
+      staleTime: 1000 * 60 * 5,
     },
   },
 });

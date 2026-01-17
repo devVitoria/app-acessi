@@ -17,7 +17,6 @@ export interface VerifyCodeReq {
   cpf: string;
 }
 
-
 export interface ResetPasswordReq {
   newPsd: string;
   cpf: string;

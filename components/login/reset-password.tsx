@@ -27,6 +27,7 @@ export default function ResetPassword({
   const [validCode, setValidCode] = useState(false);
   const [newPsw, setNewPsw] = useState("");
   const [confirmNewPsw, setConfirmNewPsw] = useState("");
+
   useEffect(() => {
     if (timeCode <= 0 || timeCode === 60) return;
 
@@ -46,7 +47,7 @@ export default function ResetPassword({
     onError: (v) => {
       ToastAndroid.show(
         `Erro ao enviar código para o seu e-mail ${v}`,
-        ToastAndroid.LONG
+        ToastAndroid.LONG,
       );
     },
   });
@@ -70,7 +71,7 @@ export default function ResetPassword({
     onError: (v) => {
       ToastAndroid.show(
         `Ocorreu um erro ao alterar sua senha ${v}`,
-        ToastAndroid.LONG
+        ToastAndroid.LONG,
       );
     },
   });
@@ -83,7 +84,7 @@ export default function ResetPassword({
       } catch (v) {
         ToastAndroid.show(
           `Ocorreu um erro no envio do código ${v}`,
-          ToastAndroid.LONG
+          ToastAndroid.LONG,
         );
       }
     }
@@ -99,7 +100,7 @@ export default function ResetPassword({
       } catch (v) {
         ToastAndroid.show(
           `Ocorreu um erro ao verificar o código ${v}`,
-          ToastAndroid.LONG
+          ToastAndroid.LONG,
         );
       }
     }
@@ -128,8 +129,8 @@ export default function ResetPassword({
             {cpfProvided !== ""
               ? `Um código de recuperação foi enviado para o seu e-mail. `
               : !validCode
-              ? "Uma nova senha pode ser cadastrada, a senha deve ser númerica e conter 6 dígitos."
-              : "Informe seu CPF no campo abaixo para enviarmos um código de recuperação para seu e-mail cadastrado."}
+                ? "Uma nova senha pode ser cadastrada, a senha deve ser númerica e conter 6 dígitos."
+                : "Informe seu CPF no campo abaixo para enviarmos um código de recuperação para seu e-mail cadastrado."}
           </Text>
           {cpfProvided === "" || !showCodeInput ? (
             <View className="flex flex-col gap-1 w-full">
@@ -152,7 +153,7 @@ export default function ResetPassword({
                     } catch (v) {
                       ToastAndroid.show(
                         `Ocorreu um erro ao verificar o CPF ${v}`,
-                        ToastAndroid.LONG
+                        ToastAndroid.LONG,
                       );
                     }
                   }
@@ -203,7 +204,7 @@ export default function ResetPassword({
                         } catch (v) {
                           ToastAndroid.show(
                             `Ocorreu um erro ao reenviar o seu código ${v}`,
-                            ToastAndroid.LONG
+                            ToastAndroid.LONG,
                           );
                         }
                       }
@@ -263,7 +264,7 @@ export default function ResetPassword({
                     } catch (v) {
                       ToastAndroid.show(
                         `Ocorreu um erro ao alterar sua senha ${v}`,
-                        ToastAndroid.LONG
+                        ToastAndroid.LONG,
                       );
                     }
                   }
