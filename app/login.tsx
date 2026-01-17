@@ -10,7 +10,7 @@ import "../global.css";
 export default function Login() {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
-  const [resetPassword, setResetPassoword] = useState(false)
+  const [resetPassword, setResetPassoword] = useState(false);
 
   return (
     <View className="flex-1 bg-white justify-center items-center">
@@ -59,9 +59,8 @@ export default function Login() {
             className="p-4  rounded-md z-50 bg-yellow-600 border border-yellow-700 w-full shadow-lg"
             onPress={() => {
               router.push("/home");
-              console.log("Chamar a API loginnn");
             }}
-          > 
+          >
             <Text className=" text-white text-center font-bold">Entrar</Text>
           </TouchableOpacity>
         </View>
@@ -79,9 +78,10 @@ export default function Login() {
         </TouchableOpacity>
 
         <TouchableOpacity
-        className="pt-6"
+          className="pt-6"
           onPress={() => {
-setResetPassoword(true)          }}
+            setResetPassoword(true);
+          }}
         >
           <Text className=" text-yellow-700 text-center font-bold underline">
             Esqueci minha senha
@@ -89,7 +89,13 @@ setResetPassoword(true)          }}
         </TouchableOpacity>
       </View>
 
-      {resetPassword && <ResetPassword open={resetPassword} setOpen={setResetPassoword} cpfProvided={cpf.length === 11 ? cpf : undefined}/>}
+      {resetPassword && (
+        <ResetPassword
+          open={resetPassword}
+          setOpen={setResetPassoword}
+          cpfProvided={cpf.length === 11 ? cpf : undefined}
+        />
+      )}
 
       <View className="absolute bottom-0 w-full h-1/3 rounded-t-3xl items-center justify-center z-20">
         <Animation />

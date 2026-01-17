@@ -3954,6 +3954,11 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lottie-react-native@~7.3.1:
+  version "7.3.5"
+  resolved "https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-7.3.5.tgz#515c703e8a8845c54dbd54d489467c0c1f21d8bd"
+  integrity sha512-5VPrHGbEmpNxrcEfmxyFZBvDksMaZ6LhyQZL0S0VIDwMRVrhGwOZQZKVFSEFU5HxNuDjxm/vPSoEhlKKfbYKHw==
+
 lower-case@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-2.0.2.tgz#6fa237c63dbdc4a82ca0fd882e4722dc5e634e28"
@@ -4894,6 +4899,11 @@ prettier-plugin-tailwindcss@^0.5.11:
   version "0.5.14"
   resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.5.14.tgz#4482eed357d5e22eac259541c70aca5a4c7b9d5c"
   integrity sha512-Puaz+wPUAhFp8Lo9HuciYKM2Y2XExESjeT+9NQoVFXZsPPnc9VYss2SpxdQ6vbatmt8/4+SN0oe0I1cPDABg9Q==
+
+prettier@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.8.0.tgz#f72cf71505133f40cfa2ef77a2668cdc558fcd69"
+  integrity sha512-yEPsovQfpxYfgWNhCfECjG5AQaO+K3dp6XERmOepyPDVqcJm+bjyCVO3pmU+nAPe0N5dDvekfGezt/EIiRe1TA==
 
 pretty-bytes@^5.6.0:
   version "5.6.0"

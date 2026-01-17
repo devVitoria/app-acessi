@@ -1,6 +1,13 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { KeyboardType, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import {
+  KeyboardType,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { fixValuesRegister } from "../constants";
 import { RegisterProps } from "../interface";
 import { StepOneProps } from "./interface";
@@ -10,9 +17,22 @@ export default function StepOne({
   setInput,
   handleAceptTerms,
   termsAccepted,
-  disableButton,
   register,
 }: StepOneProps) {
+  const [disableButton, setDisableButton] = useState(true);
+
+  useEffect(() => {
+    const handleDisableButton = () => {
+      const isFormValid =
+        Object.values(input).every((value) => value.length > 0) &&
+        termsAccepted;
+
+      setDisableButton(!isFormValid);
+    };
+
+    handleDisableButton();
+  }, [input, termsAccepted]);
+
   return (
     <View className="bg-white/70  p-2 rounded-lg border-[0.05px] border-yellow-800">
       {Object.entries(input).map(([key, value]) => (
@@ -41,7 +61,10 @@ export default function StepOne({
         </View>
       ))}
       <View className="flex flex-row gap-2 items-center justify-center px-5 mt-4">
-        <TouchableOpacity onPress={handleAceptTerms}>
+        <TouchableOpacity
+          onPress={handleAceptTerms}
+          key={disableButton ? 1 : 0}
+        >
           <FontAwesome
             name={termsAccepted ? "check-square" : "square-o"}
             size={24}
@@ -56,8 +79,8 @@ export default function StepOne({
 
       {disableButton && (
         <Text className="text-center text-sm text-yellow-700 pt-2 ">
-          Preencha os campos, conclua todas as etapas do cadastro e verifique os
-          termos para concluir.
+          Preencha os campos e verifique os termos para concluir a primeira
+          etapa do cadastro.
         </Text>
       )}
 
@@ -70,7 +93,7 @@ export default function StepOne({
         onPress={register}
         disabled={disableButton}
       >
-        <Text className=" text-white text-center font-bold">Cadastrar</Text>
+        <Text className=" text-white text-center font-bold">Contiuar</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {

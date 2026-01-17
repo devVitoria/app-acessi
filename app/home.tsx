@@ -31,8 +31,6 @@ export default function Home() {
               router.push("/register");
             }}
           >
-         
-
             <View
               className="h-16 w-16 rounded-full bg-yellow-700 justify-center items-center gap-2"
               style={{
