@@ -1,7 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { OtpInput } from "react-native-otp-entry";
+import { Text, TouchableOpacity, View } from "react-native";
 import CatFuse from "../../assets/images/catfuse.svg";
 import { StepTwoProps } from "./interface";
+import InputOtp from "../input-otp";
 
 export default function StepTwo({
   input,
@@ -22,32 +22,7 @@ export default function StepTwo({
         .
       </Text>
 
-      <OtpInput
-        numberOfDigits={4}
-        focusColor="#854d0e"
-        autoFocus={false}
-        hideStick={true}
-        placeholder="******"
-        blurOnFilled={true}
-        disabled={false}
-        type="numeric"
-        secureTextEntry={false}
-        focusStickBlinkingDuration={500}
-        onFilled={(text) => setEmailCode(text)}
-        textInputProps={{
-          accessibilityLabel: "One-Time Password",
-        }}
-        textProps={{
-          accessibilityRole: "text",
-          accessibilityLabel: "OTP digit",
-          allowFontScaling: false,
-        }}
-        theme={{
-          containerStyle: styles.containerPin,
-          pinCodeContainerStyle: styles.pinCodeContainer,
-          pinCodeTextStyle: styles.pinCodeText,
-        }}
-      />
+    <InputOtp setEmailCode={setEmailCode} numberOfDigits={4}/>
 
       <Text className="text-center font-bold text-xs text-yellow-800">
         {" "}
@@ -80,21 +55,3 @@ export default function StepTwo({
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  pinCodeContainer: {
-    borderWidth: 1,
-    borderColor: "#ca8a04",
-    width: 48,
-    height: 52,
-  },
-  pinCodeText: {
-    fontSize: 24,
-    color: "#854d0e",
-    fontWeight: "bold",
-  },
-  containerPin: {
-    justifyContent: "space-around",
-    width: "90%",
-  },
-});
