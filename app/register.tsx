@@ -20,7 +20,7 @@ export default function Register() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [disableButton, setDisableButton] = useState(true);
   const [step, setStep] = useState(0);
-  const [timeSecond, setTimeSecond] = useState(59);
+  const [timeSecond, setTimeSecond] = useState(60);
   const [emailCode, setEmailCode] = useState("");
 
   const handleAceptTerms = () => {
@@ -72,8 +72,8 @@ export default function Register() {
   }, [timeSecond]);
 
   return (
-    <View className="flex-1 bg-white justify-center items-center">
-      <View className=" w-16 h-16 rounded-full bg-[#ca8a04] p-4 justify-center items-center my-6 mt-20">
+    <View className="flex flex-1 bg-white justify-center items-center ">
+      <View className=" w-16 h-16 rounded-full bg-[#ca8a04] p-4 justify-center items-center my-6 mt-12">
         <AcessiLogo
           width={44}
           height={44}

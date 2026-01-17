@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { OtpInput } from "react-native-otp-entry";
 import { InputOtpProps } from "./interface";
 
-export default function InputOtp({setEmailCode, numberOfDigits = 4}: InputOtpProps) {
+export default function InputOtp({setEmailCode, numberOfDigits = 4, screen}: InputOtpProps) {
   return (
     <OtpInput
       numberOfDigits={numberOfDigits}
