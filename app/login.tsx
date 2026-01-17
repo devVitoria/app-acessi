@@ -61,7 +61,7 @@ export default function Login() {
               router.push("/home");
               console.log("Chamar a API loginnn");
             }}
-          >
+          > 
             <Text className=" text-white text-center font-bold">Entrar</Text>
           </TouchableOpacity>
         </View>
