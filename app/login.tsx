@@ -3,14 +3,34 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import Animation from "@/components/animations/animation";
 import ResetPassword from "@/components/login/reset-password";
+import { login } from "@/services/auth";
+import { LoginRes } from "@/services/auth/interface";
+import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
+import base64 from "react-native-base64";
 import AcessiLogo from "../assets/images/logo-acessi-light.svg";
 import "../global.css";
+import useUserStore from "./storage/user-storage";
 
 export default function Login() {
   const [cpf, setCpf] = useState("");
   const [password, setPassword] = useState("");
   const [resetPassword, setResetPassoword] = useState(false);
+  const { setUser } = useUserStore();
+  const useLogin = useMutation({
+    mutationFn: login,
+    onSuccess: (v: LoginRes) => {
+      const token = v.token.split(".")[1];
+      const decoded = base64.decode(token);
+
+      setUser(JSON.parse(JSON.stringify(decoded)));
+      router.push("/home");
+
+    },
+    onError: () => {
+      console.log("erro ao logar");
+    },
+  });
 
   return (
     <View className="flex-1 bg-white justify-center items-center">
@@ -58,7 +78,7 @@ export default function Login() {
           <TouchableOpacity
             className="p-4  rounded-md z-50 bg-yellow-600 border border-yellow-700 w-full shadow-lg"
             onPress={() => {
-              router.push("/home");
+              useLogin.mutate({ cpf, password });
             }}
           >
             <Text className=" text-white text-center font-bold">Entrar</Text>

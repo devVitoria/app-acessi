@@ -16,3 +16,13 @@ export interface VerifyCodeReq {
   code: string;
   cpf: string;
 }
+
+export interface LoginRes {
+  message: string;
+  token: string;
+}
+
+export interface LoginReq {
+  cpf: string;
+  password: string;
+}
