@@ -34,8 +34,8 @@ export default function Register() {
       setStep(1);
       pagerRef.current?.setPage(1);
     },
-    onError: (e) => {
-      console.log("erro", e);
+    onError: () => {
+      console.log("erro");
     },
   });
 
@@ -49,7 +49,7 @@ export default function Register() {
 
   const sendCodeMail = useMutation({
     mutationFn: sendCode,
-    onSuccess: (v) => {
+    onSuccess: () => {
       ToastAndroid.show("Código enviado para o e-mail!", ToastAndroid.SHORT);
     },
   });

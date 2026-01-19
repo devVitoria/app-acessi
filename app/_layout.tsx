@@ -8,6 +8,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
+import useUserStore from "./storage/user-storage";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -22,6 +23,11 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
+  const loadUser = useUserStore((state) => state.loadUser);
+
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   useEffect(() => {
     if (error) throw error;

@@ -1,5 +1,7 @@
 import { api } from "..";
 import {
+  LoginReq,
+  LoginRes,
   RegisterReq,
   RegisterRes,
   VerifyCodeReq,
@@ -14,6 +16,16 @@ export const register = async (data: RegisterReq) => {
     throw new Error(error.response?.data?.message || "Erro ao registrar");
   }
 };
+
+
+export const login = async (data: LoginReq) => {
+  try {
+    const response = await api.post<LoginRes>("/auth/login", data);
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || "Erro ao fazer login");
+  }
+}
 
 export const verifyCode = async (data: VerifyCodeReq) => {
   try {
