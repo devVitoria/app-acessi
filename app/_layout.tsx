@@ -1,5 +1,4 @@
 import Header from "@/components/header";
-import { useColorScheme } from "@/components/useColorScheme";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
@@ -9,12 +8,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
 import useUserStore from "./storage/user-storage";
-
 export { ErrorBoundary } from "expo-router";
-
-export const unstable_settings = {
-  initialRouteName: "(tabs)",
-};
 
 SplashScreen.preventAutoHideAsync();
 
@@ -56,8 +50,6 @@ const queryClient = new QueryClient({
 });
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
     <QueryClientProvider client={queryClient}>
       <Stack>
