@@ -17,7 +17,6 @@ export const register = async (data: RegisterReq) => {
   }
 };
 
-
 export const login = async (data: LoginReq) => {
   try {
     const response = await api.post<LoginRes>("/auth/login", data);
@@ -25,7 +24,7 @@ export const login = async (data: LoginReq) => {
   } catch (error: any) {
     throw new Error(error.response?.data?.message || "Erro ao fazer login");
   }
-}
+};
 
 export const verifyCode = async (data: VerifyCodeReq) => {
   try {
@@ -35,7 +34,6 @@ export const verifyCode = async (data: VerifyCodeReq) => {
     );
     return response.data;
   } catch (error: any) {
-    console.log("Erorrr", error);
     throw new Error(error.response?.data?.message || "Erro ao validar código");
   }
 };

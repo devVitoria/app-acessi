@@ -17,11 +17,6 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
-  const loadUser = useUserStore((state) => state.loadUser);
-
-  useEffect(() => {
-    loadUser();
-  }, []);
 
   useEffect(() => {
     if (error) throw error;
@@ -50,6 +45,11 @@ const queryClient = new QueryClient({
 });
 
 function RootLayoutNav() {
+  const loadUser = useUserStore((state) => state.loadUser);
+
+  useEffect(() => {
+    loadUser();
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <Stack>

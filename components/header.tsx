@@ -1,3 +1,4 @@
+import useUserStore from "@/app/storage/user-storage";
 import { FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
@@ -10,6 +11,7 @@ type HeaderProps = {
 };
 
 const Header = ({ screen }: HeaderProps) => {
+  const userStore = useUserStore();
   const insets = useSafeAreaInsets();
 
   return (
@@ -33,7 +35,7 @@ const Header = ({ screen }: HeaderProps) => {
               <AcessiLogo width={36} height={36} color="#C99700" />
               <View className="flex flex-col">
                 <Text className="text-yellow-700 font-bold text-lg">
-                  Bem vinda, Vitória!
+                  Bem vinda, {userStore.user?.name.split(" ")[0] || "usuário"}!
                 </Text>
                 <Text className="text-yellow-700 font-light text-xs">Home</Text>
               </View>

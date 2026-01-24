@@ -133,9 +133,9 @@ export default function ResetPassword({
                 : "Informe seu CPF no campo abaixo para enviarmos um código de recuperação para seu e-mail cadastrado."}
           </Text>
           {cpfProvided === "" || !showCodeInput ? (
-            <View className="flex flex-col gap-1 w-full">
+            <View className="flex flex-col gap-2 w-full px-2">
               <TextInput
-                className={`text-yellow-900 text-base border border-yellow-700 rounded-lg m-2 ml-2 font-semibold p-4`}
+                className={`text-yellow-900 text-base border border-yellow-700 rounded-lg font-semibold p-4`}
                 onChangeText={(te) => setCpf(te)}
                 placeholderTextColor={"#ca8a04"}
                 value={cpf}
@@ -145,7 +145,7 @@ export default function ResetPassword({
               />
 
               <TouchableOpacity
-                className=" p-2 rounded-md z-50 w-full justify-center bg-yellow-50"
+                className=" p-2 rounded-md z-50 w-full justify-center "
                 onPress={() => {
                   if (cpf.length === 11) {
                     try {
@@ -159,21 +159,8 @@ export default function ResetPassword({
                   }
                 }}
               >
-                <Text className=" text-yellow-700 text-center font-bold">
+                <Text className="text-yellow-800 text-center font-bold">
                   Enviar
-                </Text>
-              </TouchableOpacity>
-
-              <View className="w-full bg-yellow-800 h-[0.3px] my-2" />
-
-              <TouchableOpacity
-                className=" rounded-md z-50 w-full justify-center bg-yellow-50 border border-yellow-200 p-1"
-                onPress={() => {
-                  console.log("Contatar suporte");
-                }}
-              >
-                <Text className=" text-yellow-700 text-center font-xs font-bold">
-                  Contatar suporte
                 </Text>
               </TouchableOpacity>
             </View>

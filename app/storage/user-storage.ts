@@ -1,29 +1,11 @@
+import { User, UserStore } from "@/components/interface";
 import { create } from "zustand";
-import storage from "./mmkv";
-
-type User = {
-  userId: number;
-  name: string;
-  email: string;
-  cpf: string;
-  createdAt: string;
-  validated: boolean;
-  exp: number;
-  iat: number;
-};
-
-type UserStore = {
-  user: User | null;
-  setUser: (user: User) => Promise<void>;
-  loadUser: () => Promise<void>;
-  clearUser: () => Promise<void>;
-};
+import storage from "./index";
 
 const useUserStore = create<UserStore>((set) => ({
   user: null,
 
   setUser: async (user: User) => {
-    console.log("Storing user:", user);
     await storage.set("user", user);
     set({ user });
   },

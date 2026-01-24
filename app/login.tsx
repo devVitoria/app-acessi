@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
 import Animation from "@/components/animations/animation";
+import { User } from "@/components/interface";
 import ResetPassword from "@/components/login/reset-password";
 import { login } from "@/services/auth";
 import { LoginRes } from "@/services/auth/interface";
@@ -19,16 +20,42 @@ export default function Login() {
   const { setUser } = useUserStore();
   const useLogin = useMutation({
     mutationFn: login,
-    onSuccess: (v: LoginRes) => {
+    onSuccess: async (v: LoginRes) => {
       const token = v.token.split(".")[1];
       const decoded = base64.decode(token);
 
-      setUser(JSON.parse(JSON.stringify(decoded)));
-      router.push("/home");
+      const fixDecoded = decoded.replace("{", "").replace("}", "").split(",");
+      let newJson = {};
 
+      const fixTypesUser = (
+        value: string,
+      ): Record<string, string | number | boolean> => {
+        return {
+          cpf: value,
+          email: value,
+          name: value,
+          userId: Number(value),
+          createdAt: value,
+          exp: Number(value),
+          iat: Number(value),
+          validated: value === "true",
+        };
+      };
+
+      for (const item of fixDecoded) {
+        const [key, value] = item.split(":");
+        const fixKey = key.replaceAll('"', "").trim();
+        const fixValue = value.replaceAll('"', "").trim();
+        newJson = {
+          ...newJson,
+          [fixKey]: fixTypesUser(fixValue)[fixKey],
+        };
+      }
+      await setUser(newJson as User);
+      router.push("/home");
     },
-    onError: () => {
-      console.log("erro ao logar");
+    onError: (e) => {
+      console.log("erro ao logar", e);
     },
   });
 
