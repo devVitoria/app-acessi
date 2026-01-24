@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { RegisterProps, StepOneProps } from "./utils/interface";
 import { fixValuesRegister } from "./utils/constants";
+import { RegisterProps, StepOneProps } from "./utils/interface";
 
 export default function StepOne({
   input,
@@ -33,7 +33,7 @@ export default function StepOne({
   }, [input, termsAccepted]);
 
   return (
-    <View className="bg-white/70  p-2 rounded-lg border-[0.05px] border-yellow-800">
+    <View className="w-full justify-center  bg-[#CA8A0405]  p-2 rounded-lg border-[0.08px] border-yellow-900">
       {Object.entries(input).map(([key, value]) => (
         <View className="flex flex-col gap-1" key={`input-${key}`}>
           <Text className="px-2 text-yellow-800">
@@ -44,7 +44,7 @@ export default function StepOne({
               input[key as keyof RegisterProps].length > 0
                 ? "text-yellow-900 text-base"
                 : "text-yellow-200 text-sm"
-            } border border-yellow-700 rounded-lg m-2 ml-2 font-semibold p-4`}
+            } bg-white/70 border border-yellow-700 rounded-lg m-2 ml-2 font-semibold p-4`}
             onChangeText={(te) => setInput({ ...input, [key]: te })}
             placeholderTextColor={"#ca8a04"}
             value={value}
@@ -76,23 +76,18 @@ export default function StepOne({
         </Text>
       </View>
 
-      {disableButton && (
-        <Text className="text-center text-sm text-yellow-700 pt-2 ">
-          Preencha os campos e verifique os termos para concluir a primeira
-          etapa do cadastro.
-        </Text>
-      )}
-
       <TouchableOpacity
         style={{
           opacity: disableButton ? 0.3 : 1,
         }}
         key={disableButton ? 1 : 0}
-        className="p-4 rounded-md z-50 bg-yellow-600 opacity-50 border border-yellow-700 w-full shadow-lg mt-4"
+        className="p-4 rounded-md z-50 bg-acessiSecondary opacity-50 border border-acessiSecondary75 w-full shadow-lg mt-4"
         onPress={register}
         disabled={disableButton}
       >
-        <Text className=" text-white text-center font-bold">Contiuar</Text>
+        <Text className=" text-acessiPrimary text-center font-bold">
+          Contiuar
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {

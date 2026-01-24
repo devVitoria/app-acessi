@@ -1,139 +1,113 @@
-import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
-
 import Animation from "@/components/animations/waves";
+import GenericTouchable from "@/components/generic-touchable";
+import CustomInput from "@/components/input";
+import ResetPassword from "@/components/pages/login/reset-password";
+import {
+  inputTypes,
+  loginSuccess,
+} from "@/components/pages/login/utils/constants";
+import { LoginButtonProps } from "@/components/pages/login/utils/interface";
 import { login } from "@/services/auth";
 import { LoginRes } from "@/services/auth/interface";
+import useUserStore from "@/storage/user-storage";
 import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
-import base64 from "react-native-base64";
+import { useState } from "react";
+import { Text, View } from "react-native";
 import AcessiLogo from "../assets/images/logo-acessi-light.svg";
 import "../global.css";
-import ResetPassword from "@/components/pages/login/reset-password";
-import useUserStore from "@/storage/user-storage";
-import { User } from "@/storage/utils/interface";
 
 export default function Login() {
-  const [cpf, setCpf] = useState("");
-  const [password, setPassword] = useState("");
-  const [resetPassword, setResetPassoword] = useState(false);
   const { setUser } = useUserStore();
+
+  const [resetPassword, setResetPassoword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [cpf, setCpf] = useState("");
+
   const useLogin = useMutation({
     mutationFn: login,
-    onSuccess: async (v: LoginRes) => {
-      const token = v.token.split(".")[1];
-      const decoded = base64.decode(token);
-
-      const fixDecoded = decoded.replace("{", "").replace("}", "").split(",");
-      let newJson = {};
-
-      const fixTypesUser = (
-        value: string,
-      ): Record<string, string | number | boolean> => {
-        return {
-          cpf: value,
-          email: value,
-          name: value,
-          userId: Number(value),
-          createdAt: value,
-          exp: Number(value),
-          iat: Number(value),
-          validated: value === "true",
-        };
-      };
-
-      for (const item of fixDecoded) {
-        const [key, value] = item.split(":");
-        const fixKey = key.replaceAll('"', "").trim();
-        const fixValue = value.replaceAll('"', "").trim();
-        newJson = {
-          ...newJson,
-          [fixKey]: fixTypesUser(fixValue)[fixKey],
-        };
-      }
-      await setUser(newJson as User);
-      router.push("/home");
+    onSuccess: async (data: LoginRes) => {
+      await loginSuccess({ data, setUser });
     },
     onError: (e) => {
       console.log("erro ao logar", e);
     },
   });
 
+  const loginButtons: LoginButtonProps[] = [
+    {
+      className: undefined,
+      onPress: () => {
+        useLogin.mutate({ cpf, password });
+      },
+      children: (
+        <Text className="text-acessiPrimary text-center font-bold">Entrar</Text>
+      ),
+    },
+    {
+      className: "",
+      onPress: () => {
+        router.push("/register");
+      },
+      children: (
+        <Text className="text-center text-yellow-800 mt-4 z-50">
+          Não possui uma conta?{" "}
+          <Text className="text-yellow-700 font-bold underline">
+            Cadastre-se
+          </Text>
+        </Text>
+      ),
+    },
+    {
+      className: "pt-2",
+      onPress: () => {
+        setResetPassoword(true);
+      },
+      children: (
+        <Text className="text-yellow-700 text-center font-bold underline">
+          Esqueci minha senha
+        </Text>
+      ),
+    },
+  ];
+
   return (
-    <View className="flex-1 bg-white justify-center items-center">
-      <View className=" w-16 h-16 rounded-full bg-[#ca8a04] p-4 justify-center items-center my-6 mt-20">
-        <AcessiLogo
-          width={44}
-          height={44}
-          color="#ca8a04"
-          className="absolute"
-        />
+    <View className="flex-1 bg-white justify-center items-center gap-2 pt-6">
+      <View className="w-14 h-14  rounded-full bg-[#854d0e] p-4 justify-center items-center">
+        <AcessiLogo width={32} height={32} color="#ca8a04" />
       </View>
 
-      <Text className="text-2xl font-bold text-yellow-800 text-center mb-2">
-        Acesse sua conta
+      <Text className="text-xl font-bold text-acessiPrimary text-center px-32">
+        Acesse sua conta Acessi
       </Text>
 
-      <View className="w-11/12 rounded-md z-50 py-2 flex-1">
-        <View className="flex flex-col gap-1">
-          <Text className="px-2 text-yellow-800">CPF</Text>
-          <TextInput
-            className={`text-yellow-900 text-base border border-yellow-700 rounded-lg m-2 ml-2 font-semibold p-4`}
-            onChangeText={(te) => setCpf(te)}
-            placeholderTextColor={"#ca8a04"}
-            value={cpf}
-            keyboardType="numeric"
-            maxLength={11}
-            placeholder={"000.000.000-00"}
-          />
-        </View>
+      <Text className="text-center px-4 text-sm text-[#85623a] pt-4">
+        Inicie sua sessão preenchendo os campos abaixo com as suas credenciais
+      </Text>
 
-        <View className="flex flex-col gap-1">
-          <Text className="px-2 text-yellow-800">Senha</Text>
+      <View className="w-full px-6 rounded-md z-50 py-2 gap-4 flex-1">
+        {inputTypes({ setCpf, cpf, setPassword, password }).map((input) => (
+          <View className="flex flex-col gap-1" key={input.label}>
+            <Text className="px-2 text-yellow-800">{input.label}</Text>
+            <CustomInput
+              onChangeText={input.setter}
+              value={input.value}
+              keyboardType={input.keyboarType}
+              maxLength={input.maxLength}
+              placeholder={input.placeholder}
+            />
+          </View>
+        ))}
 
-          <TextInput
-            className={`text-yellow-900 text-base border border-yellow-700 rounded-lg m-2 ml-2 font-semibold p-4`}
-            onChangeText={(te) => setPassword(te)}
-            placeholderTextColor={"#ca8a04"}
-            value={password}
-            maxLength={6}
-            keyboardType="numeric"
-            placeholder={"******"}
-          />
-        </View>
-        <View className="px-2 pt-4">
-          <TouchableOpacity
-            className="p-4  rounded-md z-50 bg-yellow-600 border border-yellow-700 w-full shadow-lg"
-            onPress={() => {
-              useLogin.mutate({ cpf, password });
-            }}
+        {loginButtons.map((button, idx) => (
+          <GenericTouchable
+            key={idx.toString() + button.onPress.toString()}
+            onPress={button.onPress}
+            className={button.className}
           >
-            <Text className=" text-white text-center font-bold">Entrar</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            router.push("/register");
-          }}
-        >
-          <Text className="text-center text-yellow-800 mt-4 z-50">
-            Não possui uma conta?{" "}
-            <Text className="text-yellow-700 font-bold underline">
-              Cadastre-se
-            </Text>
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          className="pt-6"
-          onPress={() => {
-            setResetPassoword(true);
-          }}
-        >
-          <Text className=" text-yellow-700 text-center font-bold underline">
-            Esqueci minha senha
-          </Text>
-        </TouchableOpacity>
+            {button.children}
+          </GenericTouchable>
+        ))}
       </View>
 
       {resetPassword && (
@@ -144,7 +118,7 @@ export default function Login() {
         />
       )}
 
-      <View className="absolute bottom-0 w-full h-1/3 rounded-t-3xl items-center justify-center z-20">
+      <View className="absolute bottom-0 w-full h-1/5 items-center justify-center z-20">
         <Animation />
       </View>
     </View>

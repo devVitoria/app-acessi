@@ -4,9 +4,9 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 export default function LastStep() {
   return (
-    <View className="flex flex-1 justify-start items-center  z-50">
+    <View className="flex-1 justify-center items-center z-50">
       <LottieView
-        source={require("../../assets/json/success.json")}
+        source={require("../../../assets/json/success.json")}
         autoPlay
         loop
         style={{ width: 400, height: 400 }}

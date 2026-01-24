@@ -1,0 +1,38 @@
+import { User } from "@/storage/utils/interface";
+import base64 from "react-native-base64";
+
+export function fixTypesUser(
+  key: string,
+  value: string,
+): string | number | boolean {
+  const types: Record<string, number | boolean> = {
+    userId: Number(value),
+    exp: Number(value),
+    iat: Number(value),
+    validated: value === "true",
+  };
+
+  return types[key] ?? value;
+}
+
+export function transformStringTokenToDecriptedList(token: string): string[] {
+  const splitedToken = token.split(".")[1];
+  const decoded = base64.decode(splitedToken);
+
+  return decoded.replace("{", "").replace("}", "").split(",");
+}
+
+export function parseListUserTokenToJson(token: string[]) {
+  let json = {};
+  for (const item of token) {
+    const [key, value] = item.split(":");
+    const fixKey = key.replaceAll('"', "").trim();
+    const fixValue = value.replaceAll('"', "").trim();
+    json = {
+      ...json,
+      [fixKey]: fixTypesUser(fixKey, fixValue),
+    };
+  }
+
+  return json as User;
+}

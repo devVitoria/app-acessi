@@ -1,4 +1,7 @@
 import Header from "@/components/header";
+import LoginHeader from "@/components/pages/login/login-header";
+import RegisterHeader from "@/components/pages/register/register-header";
+import useUserStore from "@/storage/user-storage";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
@@ -7,7 +10,6 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import "../global.css";
-import useUserStore from "./storage/user-storage";
 export { ErrorBoundary } from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
@@ -50,12 +52,19 @@ function RootLayoutNav() {
   useEffect(() => {
     loadUser();
   }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Stack>
         <Stack.Screen name="home" options={{ header: () => <Header /> }} />
-        <Stack.Screen name="register" options={{ headerShown: false }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="register"
+          options={{ header: () => <RegisterHeader /> }}
+        />
+        <Stack.Screen
+          name="login"
+          options={{ header: () => <LoginHeader /> }}
+        />
       </Stack>
     </QueryClientProvider>
   );

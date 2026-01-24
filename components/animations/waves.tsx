@@ -1,8 +1,8 @@
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import Animated, { CSSAnimationKeyframes } from "react-native-reanimated";
+import Group2 from "../../assets/images////colorbackground.svg";
 import Group from "../../assets/images/background.svg";
-import Group2 from "../../assets/images/colorbackground.svg";
 
 const float: CSSAnimationKeyframes = {
   from: {
@@ -22,15 +22,16 @@ export default function Animation() {
             {
               animationName: float,
               zIndex: 10,
-              top: 200,
+              top: 160,
               animationDuration: "2s",
               animationIterationCount: "infinite",
               animationTimingFunction: "ease-in-out",
               animationDirection: "alternate",
+              opacity: 0.3,
             },
           ]}
         >
-          <Group2 width={600} height={400} color="#ca8a04" />
+          <Group2 width={600} height={400} color="#ca8a0433" />
         </Animated.View>
 
         <Animated.View
@@ -38,13 +39,14 @@ export default function Animation() {
             {
               position: "absolute",
               bottom: 0,
-              top: 30,
+              top: 60,
               zIndex: 5,
               animationName: float,
               animationDuration: "3s",
               animationIterationCount: "infinite",
               animationTimingFunction: "ease-in-out",
               animationDirection: "alternate",
+              opacity: 0.2,
             },
           ]}
         >

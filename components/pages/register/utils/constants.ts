@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import { RegisterFieldsProps, RegisterProps } from "./interface";
 
 export const capitalize = (s: string) => {
@@ -50,3 +51,17 @@ export const fixValuesRegister: Record<
     validation: null,
   },
 };
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  page: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

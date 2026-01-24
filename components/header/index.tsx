@@ -1,19 +1,18 @@
-import { FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
-import { StatusBar } from "expo-status-bar";
-import { Text, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import AcessiLogo from "../assets/images/logo-acessi.svg";
-import "../global.css";
 import useUserStore from "@/storage/user-storage";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import AcessiLogo from "../../assets/images/logo-acessi.svg";
 const Header = () => {
   const userStore = useUserStore();
   const insets = useSafeAreaInsets();
 
   return (
     <>
-      <StatusBar style="dark" backgroundColor="#daa520" />
-      <View className="bg-yellow-600">
+      <StatusBar style="light" backgroundColor="#fff" />
+      <View className="bg-[#ca8a0455]">
         <View
           className={`flex h-[78] w-full flex-row bg-white justify-center px-4 shadow-lg rounded-b-3xl`}
           style={{
@@ -36,10 +35,16 @@ const Header = () => {
                 <Text className="text-yellow-700 font-light text-xs">Home</Text>
               </View>
             </View>
-            <View className="flex flex-row items-center gap-4">
-              <FontAwesome name="user-circle-o" size={30} color="#a16207" />
-              <SimpleLineIcons name="settings" size={30} color="#a16207" />
-            </View>
+            <TouchableOpacity
+              className="flex flex-row items-center gap-4"
+              onPress={() => router.push("/login")}
+            >
+              <MaterialCommunityIcons
+                name="account-arrow-left-outline"
+                size={40}
+                color="#a16207"
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </View>

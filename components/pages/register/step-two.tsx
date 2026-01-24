@@ -1,10 +1,10 @@
+import InputOtp from "@/components/input-otp";
 import { verifyCode } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Text, ToastAndroid, TouchableOpacity, View } from "react-native";
-import CatFuse from "../../assets/images/catfuse.svg";
+import CatFuse from "../../../assets/images/catfuse.svg";
 import { StepTwoProps } from "./utils/interface";
-import InputOtp from "@/components/input-otp";
 
 export default function StepTwo({
   input,
@@ -55,7 +55,7 @@ export default function StepTwo({
   }, [emailCode]);
 
   return validMail ? (
-    <View className="flex flex-1 justify-start items-center gap-6 pt-6">
+    <View className="flex justify-start gap-6 pt-6">
       <Text className="text-center text-lg font-bold text-yellow-800">
         Validação de e-mail
       </Text>
@@ -110,7 +110,7 @@ export default function StepTwo({
     </View>
   ) : (
     <>
-      <Text className="text-center text-xs px-24 pb-2 font-bold text-yellow-950 mt-12">
+      <Text className="text-center text-xs px-12 pb-2 text-[#85623a] pt-6">
         Insira um registro válido no campo indicado para realizar a validação de
         e-mail.
       </Text>
