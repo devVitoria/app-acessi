@@ -6,11 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AcessiLogo from "../assets/images/logo-acessi.svg";
 import "../global.css";
 
-type HeaderProps = {
-  screen?: string;
-};
-
-const Header = ({ screen }: HeaderProps) => {
+const Header = () => {
   const userStore = useUserStore();
   const insets = useSafeAreaInsets();
 

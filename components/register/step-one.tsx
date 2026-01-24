@@ -8,9 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { fixValuesRegister } from "../constants";
-import { RegisterProps } from "../interface";
-import { StepOneProps } from "./interface";
+import { RegisterProps, StepOneProps } from "./utils/interface";
+import { fixValuesRegister } from "./utils/constants";
 
 export default function StepOne({
   input,

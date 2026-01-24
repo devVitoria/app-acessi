@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Text, ToastAndroid, TouchableOpacity, View } from "react-native";
 import CatFuse from "../../assets/images/catfuse.svg";
 import InputOtp from "../input-otp";
-import { StepTwoProps } from "./interface";
+import { StepTwoProps } from "./utils/interface";
 
 export default function StepTwo({
   input,

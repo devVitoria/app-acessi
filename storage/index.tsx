@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
- const storage = {
+const storage = {
   async set(key: string, value: unknown) {
     await AsyncStorage.setItem(key, JSON.stringify(value));
   },
@@ -14,6 +14,5 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
     await AsyncStorage.removeItem(key);
   },
 };
-
 
 export default storage;

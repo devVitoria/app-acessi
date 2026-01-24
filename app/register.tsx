@@ -1,11 +1,9 @@
-import { initialValuesRegister } from "@/components/constants";
-import { RegisterProps } from "@/components/interface";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { StyleSheet, Text, ToastAndroid, View } from "react-native";
 import PagerView from "react-native-pager-view";
 
-import Animation from "@/components/animations/animation";
+import Animation from "@/components/animations/waves";
 import LastStep from "@/components/register/last-step";
 import StepMarker from "@/components/register/step-marker";
 import StepOne from "@/components/register/step-one";
@@ -14,6 +12,8 @@ import { register } from "@/services/auth";
 import { sendCode } from "@/services/customer";
 import AcessiLogo from "../assets/images/logo-acessi-light.svg";
 import "../global.css";
+import { RegisterProps } from "@/components/register/utils/interface";
+import { initialValuesRegister } from "@/components/register/utils/constants";
 
 export default function Register() {
   const [input, setInput] = useState<RegisterProps>(initialValuesRegister);

@@ -1,5 +1,5 @@
 import { TouchableOpacity, View } from "react-native";
-import { StepMarkerProps } from "./interface";
+import { StepMarkerProps } from "./utils/interface";
 
 export default function StepMarker({
   nroSteps,

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 
-import Animation from "@/components/animations/animation";
-import { User } from "@/components/interface";
+import Animation from "@/components/animations/waves";
 import ResetPassword from "@/components/login/reset-password";
 import { login } from "@/services/auth";
 import { LoginRes } from "@/services/auth/interface";
@@ -12,6 +11,7 @@ import base64 from "react-native-base64";
 import AcessiLogo from "../assets/images/logo-acessi-light.svg";
 import "../global.css";
 import useUserStore from "./storage/user-storage";
+import { User } from "./storage/utils/interface";
 
 export default function Login() {
   const [cpf, setCpf] = useState("");

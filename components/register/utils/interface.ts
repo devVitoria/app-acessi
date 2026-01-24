@@ -1,6 +1,5 @@
 import { SendCodeReq, SendCodeRes } from "@/services/customer/interface";
 import { UseMutationResult } from "@tanstack/react-query";
-import { RegisterProps } from "../interface";
 
 export interface StepMarkerProps {
   nroSteps: number;
@@ -23,4 +22,20 @@ export interface StepTwoProps {
   emailCode: string;
   setFinalized: React.Dispatch<React.SetStateAction<boolean>>;
   registered: boolean;
+}
+export interface RegisterProps {
+  name: string;
+  email: string;
+  cpf: string;
+  password: string;
+}
+
+export interface RegisterFieldsProps {
+  placeholder: string;
+  error: string;
+  maxLength: number | undefined;
+  label: string;
+  validation: RegExp | null;
+  keyboard: string;
+  mask?: string;
 }

@@ -9,7 +9,7 @@ const float: CSSAnimationKeyframes = {
     transform: [{ translateY: 0 }],
   },
   to: {
-    transform: [{ translateY: -40 }], // valor negativo sobe
+    transform: [{ translateY: -40 }],
   },
 };
 

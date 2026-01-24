@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { OtpInput } from "react-native-otp-entry";
-import { InputOtpProps } from "./interface";
+import { InputOtpProps } from "./utils/interface";
 
 export default function InputOtp({
   setEmailCode,

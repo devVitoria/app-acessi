@@ -1,6 +1,6 @@
-import { User, UserStore } from "@/components/interface";
 import { create } from "zustand";
 import storage from "./index";
+import { User, UserStore } from "./utils/interface";
 
 const useUserStore = create<UserStore>((set) => ({
   user: null,

@@ -12,7 +12,7 @@ import {
   View,
 } from "react-native";
 import InputOtp from "../input-otp";
-import { ResetPasswordProps } from "./interface";
+import { ResetPasswordProps } from "./utils/interface";
 
 export default function ResetPassword({
   open,
