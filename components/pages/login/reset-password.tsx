@@ -11,8 +11,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import InputOtp from "../input-otp";
 import { ResetPasswordProps } from "./utils/interface";
+import InputOtp from "@/components/input-otp";
 
 export default function ResetPassword({
   open,

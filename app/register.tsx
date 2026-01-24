@@ -4,16 +4,16 @@ import { StyleSheet, Text, ToastAndroid, View } from "react-native";
 import PagerView from "react-native-pager-view";
 
 import Animation from "@/components/animations/waves";
-import LastStep from "@/components/register/last-step";
-import StepMarker from "@/components/register/step-marker";
-import StepOne from "@/components/register/step-one";
-import StepTwo from "@/components/register/step-two";
 import { register } from "@/services/auth";
 import { sendCode } from "@/services/customer";
 import AcessiLogo from "../assets/images/logo-acessi-light.svg";
 import "../global.css";
-import { RegisterProps } from "@/components/register/utils/interface";
-import { initialValuesRegister } from "@/components/register/utils/constants";
+import LastStep from "@/components/pages/register/last-step";
+import StepMarker from "@/components/pages/register/step-marker";
+import StepOne from "@/components/pages/register/step-one";
+import StepTwo from "@/components/pages/register/step-two";
+import { initialValuesRegister } from "@/components/pages/register/utils/constants";
+import { RegisterProps } from "@/components/pages/register/utils/interface";
 
 export default function Register() {
   const [input, setInput] = useState<RegisterProps>(initialValuesRegister);

@@ -1,10 +1,10 @@
-import useUserStore from "@/app/storage/user-storage";
 import { FontAwesome, SimpleLineIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AcessiLogo from "../assets/images/logo-acessi.svg";
 import "../global.css";
+import useUserStore from "@/storage/user-storage";
 
 const Header = () => {
   const userStore = useUserStore();
