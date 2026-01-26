@@ -1,3 +1,4 @@
+import FinancialChatBtnCall from "@/components/pages/home/financial-chat-btn-call";
 import { Text, View } from "react-native";
 
 export default function Home() {
@@ -12,7 +13,9 @@ export default function Home() {
         </Text>
       </View>
 
-      <View className="flex flex-1 mt-32 bg-white border border-acessiSecondary75 w-full rounded-t-3xl  drop-shadow-lg p-10" />
+      <View className="flex flex-1 mt-32 bg-white border border-acessiSecondary75 w-full rounded-t-3xl  drop-shadow-lg p-10">
+        <FinancialChatBtnCall />
+      </View>
     </View>
   );
 }

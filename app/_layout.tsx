@@ -65,6 +65,10 @@ function RootLayoutNav() {
           name="login"
           options={{ header: () => <LoginHeader /> }}
         />
+        <Stack.Screen
+          name="financial-chat"
+          options={{ header: () => <LoginHeader /> }}
+        />
       </Stack>
     </QueryClientProvider>
   );
