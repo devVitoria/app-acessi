@@ -1,11 +1,10 @@
 import { cn } from "@/components/cn";
 import { sendMessageChat, sentMessagesChat } from "@/services/financial";
-import { SentMessagesChatRes } from "@/services/financial/utils/interface";
 import useUserStore from "@/storage/user-storage";
 import { FontAwesome5, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -18,29 +17,26 @@ import ChatBackground from "../assets/images/chatBackground.svg";
 
 export default function FinancialChat() {
   const { user } = useUserStore();
+  const queryClient = useQueryClient();
   const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
-  const [sentMessages, setSentMessages] = useState<
-    SentMessagesChatRes[] | null
-  >([]);
 
   const sendMessageM = useMutation({
     mutationFn: sendMessageChat,
     onSuccess: () => {
-      setSent(!sent);
+      queryClient.invalidateQueries({
+        queryKey: ["finance-chat", user?.cpf],
+      });
     },
   });
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: sentMessages = [],
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["finance-chat", user?.cpf],
     queryFn: () => sentMessagesChat(user?.cpf ?? ""),
   });
-
-  useEffect(() => {
-    if (data) {
-      setSentMessages(data);
-    }
-  }, [data]);
 
   const handleSendMessage = () => {
     sendMessageM.mutate({
