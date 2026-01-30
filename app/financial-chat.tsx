@@ -1,8 +1,11 @@
 import { cn } from "@/components/cn";
+import { sendMessageChat, sentMessagesChat } from "@/services/financial";
+import { SentMessagesChatRes } from "@/services/financial/utils/interface";
 import useUserStore from "@/storage/user-storage";
 import { FontAwesome5, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -12,80 +15,40 @@ import {
   View,
 } from "react-native";
 import ChatBackground from "../assets/images/chatBackground.svg";
-interface SentMessagesProps {
-  message: string;
-  hour: string;
-  day?: string;
-}
+
 export default function FinancialChat() {
   const { user } = useUserStore();
   const [message, setMessage] = useState("");
-  const [sentMessages, setSentMessages] = useState<SentMessagesProps[]>([
-    {
-      day: "24/01/2026",
-      hour: "09:12",
-      message: "Bom dia! Quero ver meus gastos de hoje",
-    },
-    {
-      day: "24/01/2026",
-      hour: "09:15",
-      message: "Quanto eu gastei com alimentação?",
-    },
-    {
-      day: "24/01/2026",
-      hour: "18:42",
-      message: "Adicionar gasto de R$ 45 no mercado",
-    },
+  const [sent, setSent] = useState(false);
+  const [sentMessages, setSentMessages] = useState<
+    SentMessagesChatRes[] | null
+  >([]);
 
-    {
-      day: "25/01/2026",
-      hour: "08:03",
-      message: "Bom dia! Qual meu saldo atual?",
+  const sendMessageM = useMutation({
+    mutationFn: sendMessageChat,
+    onSuccess: () => {
+      setSent(!sent);
     },
-    {
-      day: "25/01/2026",
-      hour: "12:27",
-      message: "Adicionar gasto de R$ 120 em contas",
-    },
+  });
 
-    {
-      day: "26/01/2026",
-      hour: "07:58",
-      message: "Hoje quero economizar",
-    },
-    {
-      day: "26/01/2026",
-      hour: "13:10",
-      message: "Adicionar gasto de R$ 32 em almoço",
-    },
-    {
-      day: "26/01/2026",
-      hour: "21:45",
-      message: "Resumo do dia, por favor",
-    },
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["finance-chat", user?.cpf],
+    queryFn: () => sentMessagesChat(user?.cpf ?? ""),
+  });
 
-    {
-      day: "27/01/2026",
-      hour: "10:05",
-      message: "Adicionar gasto de R$ 15 em café",
-    },
-  ]);
-  // vou deixar mockado por enquanto
+  useEffect(() => {
+    if (data) {
+      setSentMessages(data);
+    }
+  }, [data]);
 
   const handleSendMessage = () => {
-    const dateMessage = dayjs()
-      .format("DD-MM-YYYY HH:MM")
-      .replaceAll("-", "/")
-      .split(" ");
-
-    setSentMessages((prev) => [
-      ...prev,
-      {
-        hour: dateMessage[1],
-        message,
-        day: dateMessage[0],
-      },
-    ]);
+    sendMessageM.mutate({
+      cpf: user?.cpf ?? "",
+      reason: message,
+      value: 0,
+      category: 0,
+    });
 
     setMessage("");
   };
@@ -121,10 +84,11 @@ export default function FinancialChat() {
             renderItem={(item) => {
               const showDay =
                 item.index === 0 ||
-                sentMessages[item.index - 1]?.day !== item.item.day;
+                sentMessages?.[item.index - 1]?.created_at.split(" ")[0] !==
+                  item.item.created_at.split(" ")[0];
 
               const isCurrentDate =
-                item.item.day?.replaceAll("/", "-") ===
+                item.item.created_at.split(" ")[0]?.replaceAll("/", "-") ===
                 dayjs().format("DD-MM-YYYY");
               return (
                 <View className="py-2 justify-end items-end">
@@ -137,7 +101,9 @@ export default function FinancialChat() {
                         )}
                       >
                         <Text className="text-center text-acessiPrimary font-bold">
-                          {isCurrentDate ? "Hoje" : item.item.day}
+                          {isCurrentDate
+                            ? "Hoje"
+                            : item.item.created_at.split(" ")[0]}
                         </Text>
                       </View>
                     </View>
@@ -145,13 +111,13 @@ export default function FinancialChat() {
 
                   <View className="w-[80%] border-[#854d0e33] bg-[#854d0e20] border-[0.5px] py-2 rounded-md p-2">
                     <Text className="text-acessiPrimary">
-                      {item.item.message}
+                      {item.item.reason}
                     </Text>
                   </View>
                   <View className="w-14 h-5  bg-[#854d0e20] flex flex-row  mt-2 rounded-md items-center justify-around">
                     <FontAwesome5 name="clock" size={10} color="#854d0e" />
                     <Text className="text-xs text-acessiPrimary">
-                      {item.item.hour}
+                      {item.item.created_at.split(" ")[1]}
                     </Text>
                   </View>
                 </View>
