@@ -7,7 +7,7 @@
     "icon": "./assets/images/acessi-logo.png",
     "scheme": "acessinew",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/images/acessi-logo.png",
       "resizeMode": "contain",
