@@ -31,7 +31,7 @@ export default function FinancialChat() {
   const queryClient = useQueryClient();
   const [message, setMessage] = useState("");
   const [hiddenInfo, setHiddenInfo] = useState(false);
-  const [hiddenSubtitle, setHiddenSubtitle] = useState(true);
+  const [hiddenSubtitle, setHiddenSubtitle] = useState(false);
 
   const sendMessageM = useMutation({
     mutationFn: sendMessageChat,
