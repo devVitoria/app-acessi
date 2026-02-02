@@ -3,7 +3,11 @@ import Modalinfo from "@/components/pages/chat/modal";
 import { sendMessageChat, sentMessagesChat } from "@/services/financial";
 import useUserStore from "@/storage/user-storage";
 import {
+  AntDesign,
+  Entypo,
+  Feather,
   FontAwesome5,
+  Fontisto,
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
@@ -36,6 +40,75 @@ export default function FinancialChat() {
   const [messageSelected, setMessageSelected] = useState<{
     id: number;
   } | null>(null);
+
+  // utilizar qundo for criar tb
+  const [categories, setCategories] = useState<
+    | {
+        id: number;
+        name: string;
+        icon: React.ReactNode;
+      }[]
+    | null
+  >([
+    {
+      id: 1,
+      name: "Comida",
+      icon: <Ionicons name="fast-food" size={16} color="#854d0e" />,
+    },
+    {
+      id: 2,
+      name: "Mercado",
+      icon: <Entypo name="shopping-cart" size={16} color="#854d0e" />,
+    },
+
+    {
+      id: 3,
+      name: "Uber",
+      icon: <AntDesign name="car" size={16} color="#854d0e" />,
+    },
+
+    {
+      id: 4,
+      name: "Compras",
+      icon: <Feather name="shopping-bag" size={16} color="#854d0e" />,
+    },
+    {
+      id: 5,
+      name: "Roupas",
+      icon: <Ionicons name="shirt" size={16} color="#854d0e" />,
+    },
+    {
+      id: 6,
+      name: "Remédio",
+      icon: <Fontisto name="pills" size={16} color="#854d0e" />,
+    },
+    {
+      id: 7,
+      name: "Adicionar",
+      icon: <Feather name="plus" size={16} color="#854d0e" />,
+    },
+  ]);
+
+  const [actions, setActions] = useState<
+    | {
+        id: number;
+        name: string;
+        icon: React.ReactNode;
+      }[]
+    | null
+  >([
+    {
+      id: 1,
+      name: "Editar",
+      icon: <MaterialIcons name="edit" size={16} color="#854d0e" />,
+    },
+    {
+      id: 1,
+      name: "Deletar",
+      icon: <MaterialIcons name="delete" size={16} color="#854d0e" />,
+    },
+  ]);
+  // vou deixar mockadas as defaults por enquanto antes de colocar em tabela
 
   const sendMessageM = useMutation({
     mutationFn: sendMessageChat,
@@ -219,7 +292,7 @@ export default function FinancialChat() {
                           className={cn(
                             `w-full justify-end items-end rounded-md py-1`,
                             {
-                              "bg-yellow-800/5":
+                              "bg-yellow-800/5 relative":
                                 messageSelected?.id === item.item.id,
                             },
                           )}
@@ -229,6 +302,16 @@ export default function FinancialChat() {
                             });
                           }}
                         >
+                          {messageSelected?.id === item.item.id && (
+                            <View className="flex flex-row gap-3 py-1 rounded-lg absolute mb-10 px-6 ">
+                              {categories?.map((c) => (
+                                <View className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full">
+                                  {c.icon}
+                                </View>
+                              ))}
+                            </View>
+                          )}
+
                           <View
                             className={`w-[80%] border-[#854d0e33] bg-[#854d0e20] border-[0.5px] py-2 rounded-md p-2`}
                           >
@@ -237,6 +320,16 @@ export default function FinancialChat() {
                             </Text>
                           </View>
                         </Pressable>
+
+                        {messageSelected?.id === item.item.id && (
+                          <View className="flex flex-row gap-3 py-1 rounded-lg absolute mr-12 mt-6 px-6 ">
+                            {actions?.map((c) => (
+                              <View className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full">
+                                {c.icon}
+                              </View>
+                            ))}
+                          </View>
+                        )}
                         <View className="w-14 h-5  bg-[#854d0e20] flex flex-row  mt-2 rounded-md items-center justify-around">
                           <FontAwesome5
                             name="clock"
