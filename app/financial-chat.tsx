@@ -19,6 +19,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   Text,
   TextInput,
   TouchableOpacity,
@@ -32,6 +33,9 @@ export default function FinancialChat() {
   const [message, setMessage] = useState("");
   const [hiddenInfo, setHiddenInfo] = useState(false);
   const [hiddenSubtitle, setHiddenSubtitle] = useState(false);
+  const [messageSelected, setMessageSelected] = useState<{
+    id: number;
+  } | null>(null);
 
   const sendMessageM = useMutation({
     mutationFn: sendMessageChat,
@@ -72,6 +76,7 @@ export default function FinancialChat() {
         className="flex-1 justify-center items-center w-full bg-[#ca8a0422] px-2"
         onStartShouldSetResponder={() => {
           Keyboard.dismiss();
+          setMessageSelected(null);
           return true;
         }}
       >
@@ -210,12 +215,28 @@ export default function FinancialChat() {
                             </View>
                           </View>
                         )}
-
-                        <View className="w-[80%] border-[#854d0e33] bg-[#854d0e20] border-[0.5px] py-2 rounded-md p-2">
-                          <Text className="text-acessiPrimary">
-                            {item.item.reason}
-                          </Text>
-                        </View>
+                        <Pressable
+                          className={cn(
+                            `w-full justify-end items-end rounded-md py-1`,
+                            {
+                              "bg-yellow-800/5":
+                                messageSelected?.id === item.item.id,
+                            },
+                          )}
+                          onLongPress={() => {
+                            setMessageSelected({
+                              id: item.item.id,
+                            });
+                          }}
+                        >
+                          <View
+                            className={`w-[80%] border-[#854d0e33] bg-[#854d0e20] border-[0.5px] py-2 rounded-md p-2`}
+                          >
+                            <Text className="text-acessiPrimary">
+                              {item.item.reason}
+                            </Text>
+                          </View>
+                        </Pressable>
                         <View className="w-14 h-5  bg-[#854d0e20] flex flex-row  mt-2 rounded-md items-center justify-around">
                           <FontAwesome5
                             name="clock"
