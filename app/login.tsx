@@ -114,7 +114,7 @@ export default function Login() {
         <ResetPassword
           open={resetPassword}
           setOpen={setResetPassoword}
-          cpfProvided={cpf.length === 11 ? cpf : undefined}
+          cpfProvided={cpf?.length === 11 ? cpf : undefined}
         />
       )}
 

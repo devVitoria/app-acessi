@@ -3,6 +3,7 @@ export interface SendMessageChatReq {
   reason: string;
   cpf: string;
   category?: number | null;
+  token?: string;
 }
 
 export interface SentMessagesChatRes {

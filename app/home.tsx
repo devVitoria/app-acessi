@@ -1,7 +1,25 @@
 import FinancialChatBtnCall from "@/components/pages/home/financial-chat-btn-call";
+import { verifyToken } from "@/services/auth";
+import useUserStore from "@/storage/user-storage";
+import { useMutation } from "@tanstack/react-query";
+import { router } from "expo-router";
+import { useEffect } from "react";
 import { Text, View } from "react-native";
 
 export default function Home() {
+  const token = useUserStore();
+
+  const verifyTokenMutation = useMutation({
+    mutationFn: verifyToken,
+    onSuccess: (v) => {
+      if (v.status === "unauthorized") router.replace("/login");
+    },
+  });
+  useEffect(() => {
+    if ((token.user?.token ?? "").length === 0) router.replace("/login");
+
+    verifyTokenMutation.mutate(token.user?.token ?? "");
+  }, []);
   return (
     <View className="flex-1 bg-acessiSecondary items-center justify-center px-2 ">
       <View className="absolute top-8 gap-1">

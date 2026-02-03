@@ -7,6 +7,7 @@ export type User = {
   validated: boolean;
   exp: number;
   iat: number;
+  token?: string;
 };
 
 export type UserStore = {

@@ -15,16 +15,22 @@ export function fixTypesUser(
   return types[key] ?? value;
 }
 
-export function transformStringTokenToDecriptedList(token: string): string[] {
+export function transformStringTokenToDecriptedList(token: string): {
+  listToken: string[];
+  token: string;
+} {
   const splitedToken = token.split(".")[1];
   const decoded = base64.decode(splitedToken);
 
-  return decoded.replace("{", "").replace("}", "").split(",");
+  return {
+    listToken: decoded.replace("{", "").replace("}", "").split(","),
+    token: token,
+  };
 }
 
-export function parseListUserTokenToJson(token: string[]) {
+export function parseListUserTokenToJson(listToken: string[], token: string) {
   let json = {};
-  for (const item of token) {
+  for (const item of listToken) {
     const [key, value] = item.split(":");
     const fixKey = key.replaceAll('"', "").trim();
     const fixValue = value.replaceAll('"', "").trim();
@@ -33,6 +39,9 @@ export function parseListUserTokenToJson(token: string[]) {
       [fixKey]: fixTypesUser(fixKey, fixValue),
     };
   }
-
-  return json as User;
+  const finalJson = {
+    ...json,
+    token: token,
+  };
+  return finalJson as User;
 }

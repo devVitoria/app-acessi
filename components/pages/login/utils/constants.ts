@@ -10,9 +10,9 @@ import {
 import { LoginSuccessProps } from "./interface";
 
 export const loginSuccess = async ({ data, setUser }: LoginSuccessProps) => {
-  const token = transformStringTokenToDecriptedList(data.token);
+  const result = transformStringTokenToDecriptedList(data?.token);
 
-  const jsonUser = parseListUserTokenToJson(token);
+  const jsonUser = parseListUserTokenToJson(result?.listToken, result?.token);
 
   await setUser(jsonUser);
   router.push("/home");

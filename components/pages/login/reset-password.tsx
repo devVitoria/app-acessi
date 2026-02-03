@@ -91,7 +91,7 @@ export default function ResetPassword({
   }, []);
 
   useEffect(() => {
-    if (code.length === 4) {
+    if (code?.length === 4) {
       try {
         verifyCodeMail.mutate({
           code,
@@ -147,7 +147,7 @@ export default function ResetPassword({
               <TouchableOpacity
                 className=" p-2 rounded-md z-50 w-full justify-center "
                 onPress={() => {
-                  if (cpf.length === 11) {
+                  if (cpf?.length === 11) {
                     try {
                       sendCodeMail.mutate({ cpf: cpf });
                     } catch (v) {
@@ -183,7 +183,7 @@ export default function ResetPassword({
                   <TouchableOpacity
                     className=" p-2 rounded-md z-50 w-full justify-center"
                     onPress={() => {
-                      if (newPsw.length === 6 && newPsw === confirmNewPsw) {
+                      if (newPsw?.length === 6 && newPsw === confirmNewPsw) {
                         try {
                           sendCodeMail.mutate({
                             cpf: cpf ?? cpfProvided,
@@ -242,7 +242,7 @@ export default function ResetPassword({
               <TouchableOpacity
                 className=" p-2 rounded-md z-50 w-full justify-center"
                 onPress={() => {
-                  if (newPsw.length === 6 && newPsw === confirmNewPsw) {
+                  if (newPsw?.length === 6 && newPsw === confirmNewPsw) {
                     try {
                       resetPsw.mutate({
                         cpf: cpf ?? cpfProvided,
