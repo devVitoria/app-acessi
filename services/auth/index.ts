@@ -6,6 +6,7 @@ import {
   RegisterRes,
   VerifyCodeReq,
   VerifyCodeRes,
+  VerifyTokenRes,
 } from "./interface";
 
 export const register = async (data: RegisterReq) => {
@@ -32,6 +33,17 @@ export const verifyCode = async (data: VerifyCodeReq) => {
       "/customer/verify-code",
       data,
     );
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || "Erro ao validar código");
+  }
+};
+
+export const verifyToken = async (token: string) => {
+  try {
+    const response = await api.post<VerifyTokenRes>("/auth/verify-token", {
+      token,
+    });
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || "Erro ao validar código");

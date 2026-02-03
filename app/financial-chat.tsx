@@ -41,6 +41,8 @@ export default function FinancialChat() {
     id: number;
   } | null>(null);
 
+  const token = useUserStore();
+
   // utilizar qundo for criar tb
   const [categories, setCategories] = useState<
     | {
@@ -125,7 +127,7 @@ export default function FinancialChat() {
     error,
   } = useQuery({
     queryKey: ["finance-chat", user?.cpf],
-    queryFn: () => sentMessagesChat(user?.cpf ?? ""),
+    queryFn: () => sentMessagesChat(user?.cpf ?? "", token.user?.token ?? ""),
   });
 
   const handleSendMessage = () => {
@@ -134,6 +136,7 @@ export default function FinancialChat() {
       reason: message,
       value: 0,
       category: 0,
+      token: token.user?.token ?? "",
     });
 
     setMessage("");
@@ -252,7 +255,7 @@ export default function FinancialChat() {
                   Carregando seu chat...
                 </Text>
               </View>
-            ) : sentMessages.length > 0 ? (
+            ) : sentMessages?.length > 0 ? (
               <View className="flex-1 w-full  z-50">
                 <FlatList
                   className="flex-1 w-full z-50 "
@@ -305,7 +308,10 @@ export default function FinancialChat() {
                           {messageSelected?.id === item.item.id && (
                             <View className="flex flex-row gap-3 py-1 rounded-lg absolute mb-10 px-6 ">
                               {categories?.map((c) => (
-                                <View className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full">
+                                <View
+                                  key={c.id}
+                                  className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full"
+                                >
                                   {c.icon}
                                 </View>
                               ))}
@@ -324,7 +330,10 @@ export default function FinancialChat() {
                         {messageSelected?.id === item.item.id && (
                           <View className="flex flex-row gap-3 py-1 rounded-lg absolute mr-12 mt-6 px-6 ">
                             {actions?.map((c) => (
-                              <View className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full">
+                              <View
+                                key={c.id}
+                                className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full"
+                              >
                                 {c.icon}
                               </View>
                             ))}

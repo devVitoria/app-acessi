@@ -23,7 +23,7 @@ export default function StepOne({
   useEffect(() => {
     const handleDisableButton = () => {
       const isFormValid =
-        Object.values(input).every((value) => value.length > 0) &&
+        Object.values(input).every((value) => value?.length > 0) &&
         termsAccepted;
 
       setDisableButton(!isFormValid);
@@ -41,7 +41,7 @@ export default function StepOne({
           </Text>
           <TextInput
             className={` ${
-              input[key as keyof RegisterProps].length > 0
+              input[key as keyof RegisterProps]?.length > 0
                 ? "text-yellow-900 text-base"
                 : "text-yellow-200 text-sm"
             } bg-white/70 border border-yellow-700 rounded-lg m-2 ml-2 font-semibold p-4`}

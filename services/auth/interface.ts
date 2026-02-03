@@ -26,3 +26,7 @@ export interface LoginReq {
   cpf: string;
   password: string;
 }
+
+export interface VerifyTokenRes {
+  status: "authorized" | "unauthorized";
+}
