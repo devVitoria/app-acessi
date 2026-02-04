@@ -6,6 +6,9 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { NotifierWrapper } from "react-native-notifier";
+
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
@@ -54,22 +57,27 @@ function RootLayoutNav() {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Stack>
-        <Stack.Screen name="home" options={{ header: () => <Header /> }} />
-        <Stack.Screen
-          name="register"
-          options={{ header: () => <RegisterHeader /> }}
-        />
-        <Stack.Screen
-          name="login"
-          options={{ header: () => <LoginHeader /> }}
-        />
-        <Stack.Screen
-          name="financial-chat"
-          options={{ header: () => <LoginHeader /> }}
-        />
-      </Stack>
-    </QueryClientProvider>
+    // TODO adicionar safe area insets
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <NotifierWrapper containerStyle={{ position: "absolute", top: 34 }}>
+          <Stack>
+            <Stack.Screen name="home" options={{ header: () => <Header /> }} />
+            <Stack.Screen
+              name="register"
+              options={{ header: () => <RegisterHeader /> }}
+            />
+            <Stack.Screen
+              name="login"
+              options={{ header: () => <LoginHeader /> }}
+            />
+            <Stack.Screen
+              name="financial-chat"
+              options={{ header: () => <LoginHeader /> }}
+            />
+          </Stack>
+        </NotifierWrapper>
+      </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }

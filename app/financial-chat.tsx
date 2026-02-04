@@ -368,18 +368,20 @@ export default function FinancialChat() {
                 </Text>
               </View>
             )}
-            <View className="flex flex-row h-16 w-full bg-[#854d0e77] justify-between items-center px-4 rounded-xl my-4 ">
-              <TextInput
-                value={message}
-                onChangeText={setMessage}
-                className="text-white text-lg w-[90%]"
-                placeholderTextColor="#fff"
-                placeholderClassName="font-bold"
-                placeholder="Digite algo..."
-              />
-              <TouchableOpacity onPress={handleSendMessage}>
-                <Ionicons name="send-sharp" size={24} color="white" />
-              </TouchableOpacity>
+            <View className="w-full p-4">
+              <View className="flex flex-row h-16  bg-[#854d0e77] justify-between items-center px-4 rounded-xl my-4 ">
+                <TextInput
+                  value={message}
+                  onChangeText={setMessage}
+                  className="text-white text-lg w-[90%]"
+                  placeholderTextColor="#fff"
+                  placeholderClassName="font-bold"
+                  placeholder="Digite algo..."
+                />
+                <TouchableOpacity onPress={handleSendMessage}>
+                  <Ionicons name="send-sharp" size={24} color="white" />
+                </TouchableOpacity>
+              </View>
             </View>
 
             {hiddenInfo && (
