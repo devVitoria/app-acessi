@@ -1,4 +1,4 @@
-import { RegisterProps } from "@/components/interface";
+import { RegisterProps } from "@/components/pages/register/utils/interface";
 
 export interface RegisterRes {
   message: string;
