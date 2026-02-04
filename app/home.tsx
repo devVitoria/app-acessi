@@ -1,6 +1,7 @@
-import FinancialChatBtnCall from "@/components/pages/home/financial-chat-btn-call";
+import HomeResourceButton from "@/components/pages/home/home-resource-button";
 import { verifyToken } from "@/services/auth";
 import useUserStore from "@/storage/user-storage";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useEffect } from "react";
@@ -47,7 +48,19 @@ export default function Home() {
       </View>
 
       <View className="flex flex-1 mt-32 bg-white border border-acessiSecondary75 w-full rounded-t-3xl  drop-shadow-lg p-10">
-        <FinancialChatBtnCall />
+        <HomeResourceButton
+          onPress={() => {
+            router.push("/financial-chat");
+          }}
+          title={`Chat{"\n"}Financeiro`}
+          icon={
+            <MaterialCommunityIcons
+              name="message-reply-text-outline"
+              size={24}
+              color="#854d0e"
+            />
+          }
+        />
       </View>
     </View>
   );

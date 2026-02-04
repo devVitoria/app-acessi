@@ -1,28 +1,24 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
+import { HomeResourceButtonProps } from "./utils/interface";
 
-export default function FinancialChatBtnCall() {
-  // TODO depois tranformar isso aqui em componente pros prox recursos
+export default function HomeResourceButton({
+  onPress,
+  icon,
+  title,
+}: HomeResourceButtonProps) {
   return (
     <TouchableOpacity
       className="flex flex-col items-center gap-2 max-w-[68px]"
-      onPress={() => {
-        router.push("/financial-chat");
-      }}
+      onPress={onPress}
     >
       <View className="w-16 h-16 rounded-xl border border-acessiSecondary75 justify-center items-center bg-acessiSecondary ">
-        <MaterialCommunityIcons
-          name="message-reply-text-outline"
-          size={24}
-          color="#854d0e"
-        />
+        {icon}
       </View>
       <Text
         className="text-acessiPrimary text-center text-xs font-medium"
         numberOfLines={2}
       >
-        Chat{"\n"}Financeiro
+        {title}
       </Text>
     </TouchableOpacity>
   );
