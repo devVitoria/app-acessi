@@ -5,18 +5,37 @@ import { useMutation } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
+import { Notifier, NotifierComponents } from "react-native-notifier";
 
 export default function Home() {
   const token = useUserStore();
+  const handleSendToLogin = () => {
+    Notifier.showNotification({
+      title: "Acesso expirado",
+      description: "Você será redirecionado para a tela de Login em instantes",
+      Component: NotifierComponents.Alert,
+
+      componentProps: {
+        alertType: "info",
+      },
+    });
+    setTimeout(() => {
+      router.replace("/login");
+    }, 2000);
+  };
 
   const verifyTokenMutation = useMutation({
     mutationFn: verifyToken,
     onSuccess: (v) => {
-      if (v.status === "unauthorized") router.replace("/login");
+      if (v.status === "unauthorized") {
+        handleSendToLogin();
+      }
     },
   });
   useEffect(() => {
-    if ((token.user?.token ?? "").length === 0) router.replace("/login");
+    if ((token.user?.token ?? "").length === 0) {
+      handleSendToLogin();
+    }
 
     verifyTokenMutation.mutate(token.user?.token ?? "");
   }, []);
