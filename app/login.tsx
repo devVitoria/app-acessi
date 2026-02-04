@@ -2,6 +2,8 @@ import Animation from "@/components/animations/waves";
 import GenericTouchable from "@/components/generic-touchable";
 import CustomInput from "@/components/input";
 import ResetPassword from "@/components/pages/login/reset-password";
+import { Notifier, NotifierComponents } from "react-native-notifier";
+
 import {
   inputTypes,
   loginSuccess,
@@ -29,8 +31,16 @@ export default function Login() {
     onSuccess: async (data: LoginRes) => {
       await loginSuccess({ data, setUser });
     },
-    onError: (e) => {
-      console.log("erro ao logar", e);
+    onError: () => {
+      Notifier.showNotification({
+        title: "Credenciais inválidas",
+        description: "Verifique suas informações e tente novamente",
+        Component: NotifierComponents.Alert,
+
+        componentProps: {
+          alertType: "error",
+        },
+      });
     },
   });
 
