@@ -15,7 +15,7 @@ export default function StepTwo({
   registered,
 }: StepTwoProps) {
   const validMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email);
-  const disableButton = emailCode.length < 4;
+  const disableButton = emailCode?.length < 4;
   const [timeSecond, setTimeSecond] = useState(60);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function StepTwo({
   }, []);
 
   useEffect(() => {
-    if (emailCode.length === 4) {
+    if (emailCode?.length === 4) {
       verifyCodeMail.mutate({ cpf: input.cpf, code: emailCode });
     }
   }, [emailCode]);
