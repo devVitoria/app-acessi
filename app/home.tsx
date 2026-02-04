@@ -12,12 +12,8 @@ export default function Home() {
   const handleSendToLogin = () => {
     Notifier.showNotification({
       title: "Acesso expirado",
-      description: "Você será redirecionado para a tela de Login em instantes",
-      Component: NotifierComponents.Alert,
-
-      componentProps: {
-        alertType: "info",
-      },
+      description: "Redirecionado para a tela de Login.",
+      Component: NotifierComponents.Notification,
     });
     setTimeout(() => {
       router.replace("/login");
