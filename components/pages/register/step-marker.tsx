@@ -14,9 +14,9 @@ export default function StepMarker({
           onPress={() => onClick(idx)}
           className={`${
             currentStep || idx === 0
-              ? "bg-[#ca8a0455] border border-[#CA8A0444]"
-              : "border-[#CA8A0455] border bg-[#CA8A0410]"
-          } w-5 h-4 rounded-lg`}
+              ? "bg-acessiPrimary border border-[#CA8A0444]"
+              : "border-acessiPrimary border bg-[#CA8A0410]"
+          } w-4 h-4 rounded-lg`}
         />
       ))}
     </View>

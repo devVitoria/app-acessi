@@ -28,7 +28,7 @@ export const fixValuesRegister: Record<
   cpf: {
     placeholder: "000.000.000-00",
     error: "CPF é obrigatório",
-    maxLength: 11,
+    maxLength: 15,
     label: "CPF",
     keyboard: "numeric",
     validation: null,
