@@ -1,6 +1,5 @@
 import Header from "@/components/header";
 import LoginHeader from "@/components/pages/login/login-header";
-import RegisterHeader from "@/components/pages/register/register-header";
 import useUserStore from "@/storage/user-storage";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -65,7 +64,9 @@ function RootLayoutNav() {
             <Stack.Screen name="home" options={{ header: () => <Header /> }} />
             <Stack.Screen
               name="register"
-              options={{ header: () => <RegisterHeader /> }}
+              options={{
+                header: () => false,
+              }}
             />
             <Stack.Screen
               name="login"

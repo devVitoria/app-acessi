@@ -1,3 +1,4 @@
+import { cpfFormatter } from "@/formatters";
 import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
@@ -33,7 +34,7 @@ export default function StepOne({
   }, [input, termsAccepted]);
 
   return (
-    <View className="w-full justify-center  bg-[#CA8A0405]  p-2 rounded-lg border-[0.08px] border-yellow-900">
+    <View className="w-full justify-center  bg-[#c0bcb405]  p-2 rounded-lg border-[0.08px] border-yellow-900">
       {Object.entries(input).map(([key, value]) => (
         <View className="flex flex-col gap-1" key={`input-${key}`}>
           <Text className="px-2 text-yellow-800">
@@ -46,8 +47,8 @@ export default function StepOne({
                 : "text-yellow-200 text-sm"
             } bg-white/70 border border-yellow-700 rounded-lg m-2 ml-2 font-semibold p-4`}
             onChangeText={(te) => setInput({ ...input, [key]: te })}
-            placeholderTextColor={"#ca8a04"}
-            value={value}
+            placeholderTextColor={"#713f1233"}
+            value={key === "cpf" ? cpfFormatter(value) : value}
             maxLength={fixValuesRegister[key as keyof RegisterProps].maxLength}
             keyboardType={
               fixValuesRegister[key as keyof RegisterProps]

@@ -9,6 +9,7 @@ import {
   loginSuccess,
 } from "@/components/pages/login/utils/constants";
 import { LoginButtonProps } from "@/components/pages/login/utils/interface";
+import { cpfFormatter } from "@/formatters";
 import { login } from "@/services/auth";
 import { LoginRes } from "@/services/auth/interface";
 import useUserStore from "@/storage/user-storage";
@@ -101,7 +102,9 @@ export default function Login() {
             <Text className="px-2 text-yellow-800">{input.label}</Text>
             <CustomInput
               onChangeText={input.setter}
-              value={input.value}
+              value={
+                input.label === "CPF" ? cpfFormatter(input.value) : input.value
+              }
               keyboardType={input.keyboarType}
               maxLength={input.maxLength}
               placeholder={input.placeholder}

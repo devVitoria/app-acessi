@@ -29,7 +29,7 @@ export const inputTypes = ({
     setter: setCpf,
     value: cpf,
     keyboarType: "numeric",
-    maxLength: 11,
+    maxLength: 14,
     placeholder: "000.000.000-00",
   },
   {
