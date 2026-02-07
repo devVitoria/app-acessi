@@ -149,7 +149,7 @@ export default function FinancialChat() {
       keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
     >
       <View
-        className="flex-1 justify-center items-center w-full bg-[#ca8a0422] px-2"
+        className="flex-1 justify-center items-center w-full bg-white px-2"
         onStartShouldSetResponder={() => {
           Keyboard.dismiss();
           setMessageSelected(null);
@@ -167,7 +167,7 @@ export default function FinancialChat() {
             }}
           />
           <View className="flex-1 w-full ">
-            <View className="flex flex-row items-center gap-4 my-2 w-full px-2 ">
+            <View className="flex bg-white flex-row items-center gap-4 my-2 w-full px-2 ">
               <TouchableOpacity
                 onPress={() => {
                   router.push("/home");
@@ -218,29 +218,31 @@ export default function FinancialChat() {
                 )}
               </View>
             </View>
-            <View className="flex z-50 flex-row border-b-1 border-l-acessiPrimary w-full bg-[#854d0e77] justify-between items-center px-4 rounded-b-xl mb-4">
-              <View className="flex flex-row items-center gap-4 py-2">
-                <TouchableOpacity
-                  onPress={() => {
-                    router.push("/home");
-                  }}
-                  className="h-12 w-12 bg-white/40 rounded-full justify-center items-center"
-                >
-                  <FontAwesome5 name="user-alt" size={24} color="#854d0e77" />
-                </TouchableOpacity>
-                <View className="flex flex-col justify-start items-start">
-                  <Text className="text-white/80 font-bold text-lg">
-                    {user?.name.split(" ")[0]}
-                  </Text>
-                  <Text className="text-white/80 text-xs">No chat</Text>
+            <View className="bg-white">
+              <View className="flex  flex-row border-b-1 border-l-acessiPrimary w-full bg-[#854d0e20] justify-between items-center px-4 rounded-b-xl mb-4">
+                <View className="flex flex-row items-center gap-4 py-2">
+                  <TouchableOpacity
+                    onPress={() => {
+                      router.push("/home");
+                    }}
+                    className="h-12 w-12 bg-[#854d0e20] rounded-full justify-center items-center"
+                  >
+                    <FontAwesome5 name="user-alt" size={24} color="#854d0e20" />
+                  </TouchableOpacity>
+                  <View className="flex flex-col justify-start items-start">
+                    <Text className="text-acessiPrimary font-bold text-lg">
+                      {user?.name.split(" ")[0]}
+                    </Text>
+                    <Text className="text-acessiPrimary text-xs">No chat</Text>
+                  </View>
                 </View>
+                <SimpleLineIcons
+                  name="options-vertical"
+                  size={20}
+                  color="#854d0e"
+                  className="opacity-80"
+                />
               </View>
-              <SimpleLineIcons
-                name="options-vertical"
-                size={20}
-                color="white"
-                className="opacity-80"
-              />
             </View>
             {isLoading ? (
               <View className="flex-1 justify-center items-center z-50">
@@ -295,7 +297,7 @@ export default function FinancialChat() {
                           className={cn(
                             `w-full justify-end items-end rounded-md py-1`,
                             {
-                              "bg-yellow-800/5 relative":
+                              "bg-black/10 relative z-50":
                                 messageSelected?.id === item.item.id,
                             },
                           )}
@@ -307,32 +309,33 @@ export default function FinancialChat() {
                         >
                           {messageSelected?.id === item.item.id && (
                             <View className="flex flex-row gap-3 py-1 rounded-lg absolute mb-10 px-6 ">
-                              {categories?.map((c) => (
+                              {categories?.map((c, idx) => (
                                 <View
-                                  key={c.id}
-                                  className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full"
+                                  key={c.id + c.name + `-icon${idx}`}
+                                  className="flex flex-col gap-1 justify-center items-center bg-white opacity-70 border border-yellow-900 w-8 h-8 rounded-full mb-4"
                                 >
                                   {c.icon}
                                 </View>
                               ))}
                             </View>
                           )}
-
-                          <View
-                            className={`w-[80%] border-[#854d0e33] bg-[#854d0e20] border-[0.5px] py-2 rounded-md p-2`}
-                          >
-                            <Text className="text-acessiPrimary">
-                              {item.item.reason}
-                            </Text>
+                          <View className="w-[80%] bg-white justify-end items-end rounded-md">
+                            <View
+                              className={`w-full bg-[#854d0e20] border-[0.2px] border-white py-2 rounded-md p-2`}
+                            >
+                              <Text className="text-acessiPrimary">
+                                {item.item.reason}
+                              </Text>
+                            </View>
                           </View>
                         </Pressable>
 
                         {messageSelected?.id === item.item.id && (
                           <View className="flex flex-row gap-3 py-1 rounded-lg absolute mr-12 mt-6 px-6 ">
-                            {actions?.map((c) => (
+                            {actions?.map((c, idx) => (
                               <View
-                                key={c.id}
-                                className="flex flex-col gap-1 justify-center items-center bg-[#854d0e30] border border-yellow-900 w-8 h-8 rounded-full"
+                                key={c.id + c.name + `-icon${idx}`}
+                                className="flex flex-col gap-1 justify-center items-center bg-white opacity-65 border border-yellow-900 w-8 h-8 rounded-full"
                               >
                                 {c.icon}
                               </View>
@@ -369,17 +372,17 @@ export default function FinancialChat() {
               </View>
             )}
             <View className="w-full p-4">
-              <View className="flex flex-row h-16  bg-[#854d0e77] justify-between items-center px-4 rounded-xl my-4 ">
+              <View className="flex flex-row h-16  bg-[#854d0e20] border-1 border-[#854d0e] justify-between items-center px-4 rounded-xl my-4 ">
                 <TextInput
                   value={message}
                   onChangeText={setMessage}
-                  className="text-white text-lg w-[90%]"
-                  placeholderTextColor="#fff"
+                  className="text-acessiPrimary text-lg w-[90%]"
+                  placeholderTextColor="#854d0e"
                   placeholderClassName="font-bold"
                   placeholder="Digite algo..."
                 />
                 <TouchableOpacity onPress={handleSendMessage}>
-                  <Ionicons name="send-sharp" size={24} color="white" />
+                  <Ionicons name="send-sharp" size={24} color="#854d0e" />
                 </TouchableOpacity>
               </View>
             </View>

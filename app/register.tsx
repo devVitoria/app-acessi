@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
-import { ToastAndroid, View } from "react-native";
+import { Dimensions, ToastAndroid, View } from "react-native";
 import PagerView from "react-native-pager-view";
 
 import Animation from "@/components/animations/waves";
@@ -109,8 +109,10 @@ export default function Register() {
     );
   };
 
+  const height = Dimensions.get("window").height / 16;
+  console.log("hei", height);
   return (
-    <View className="flex flex-1 bg-white justify-center items-center pt-4">
+    <View className="flex flex-1 bg-white justify-center items-center pt-36">
       <RegisterHeader
         isFinalized={isFinalized}
         minPageAllowed={minPageAllowed}

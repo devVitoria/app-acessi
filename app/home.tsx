@@ -52,7 +52,7 @@ export default function Home() {
           onPress={() => {
             router.push("/financial-chat");
           }}
-          title={`Chat{"\n"}Financeiro`}
+          title={`Chat Financeiro`}
           icon={
             <MaterialCommunityIcons
               name="message-reply-text-outline"
